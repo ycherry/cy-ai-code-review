@@ -33,7 +33,7 @@ export interface CodeDiff {
 export interface ReviewResult {
   file: string
   issues: Array<{
-    line?: number
+    line?: number | string
     severity: 'info' | 'warning' | 'error'
     message: string
     suggestion?: string

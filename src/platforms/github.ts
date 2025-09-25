@@ -120,7 +120,7 @@ export class GitHubPlatform implements Platform {
   /**
    * 提交审查评论
    */
-  async submitReviewComment(filePath: string, line: number | undefined, comment: string): Promise<void> {
+  async submitReviewComment(filePath: string, line: number | string | undefined, comment: string): Promise<void> {
     try {
       // 获取提交SHA，用于添加评论
       const pullResponse = await fetch(
@@ -145,6 +145,7 @@ export class GitHubPlatform implements Platform {
       // 如果有具体行号，添加行注释
       if (line) {
         // 创建一个审查并添加评论
+        const lastLine = typeof line === 'number' ? line : line.split('-')[1]
         const reviewResponse = await fetch(
           `${this.baseUrl}/repos/${this.owner}/${this.repo}/pulls/${this.prId}/reviews`,
           {
@@ -161,7 +162,7 @@ export class GitHubPlatform implements Platform {
               comments: [
                 {
                   path: filePath,
-                  position: Number(line),
+                  position: Number(lastLine),
                   body: comment,
                 },
               ],
@@ -292,10 +293,11 @@ export class GitHubPlatform implements Platform {
       for (const result of results) {
         for (const issue of result.issues) {
           if (issue.line) { // 只收集有行号的评论
+            const lastline = typeof issue.line === 'number' ? issue.line : issue.line.split('-')[1]
             const message = this.formatIssueComment(issue)
             comments.push({
               path: result.file,
-              position: issue.line,
+              position: lastline,
               body: message,
             })
           }

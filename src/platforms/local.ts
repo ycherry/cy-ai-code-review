@@ -118,7 +118,7 @@ export class LocalPlatform implements Platform {
    * 提交审查评论
    * 在本地平台中，只是将评论输出到控制台
    */
-  async submitReviewComment(filePath: string, line: number | undefined, comment: string): Promise<void> {
+  async submitReviewComment(filePath: string, line: number | string | undefined, comment: string): Promise<void> {
     // 使用更好的格式化输出单个文件的评论
     consola.log(`\n${chalk.bgBlue.white(` 文件评论: ${filePath} `)}\n`)
 

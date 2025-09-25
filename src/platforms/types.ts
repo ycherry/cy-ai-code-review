@@ -35,7 +35,7 @@ export interface Platform {
   /**
    * 提交审查评论
    */
-  submitReviewComment: (filePath: string, line: number | undefined, comment: string) => Promise<void>
+  submitReviewComment: (filePath: string, line: number | string | undefined, comment: string) => Promise<void>
 
   /**
    * 提交审查总结
