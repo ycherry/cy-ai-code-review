@@ -304,6 +304,8 @@ export class GitHubPlatform implements Platform {
         }
       }
 
+      console.log('>>>>comments', comments)
+
       // 如果有行评论，创建一个批量审查
       if (comments.length > 0) {
         const reviewResponse = await fetch(
