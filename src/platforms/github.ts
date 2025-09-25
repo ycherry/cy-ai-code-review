@@ -338,8 +338,7 @@ export class GitHubPlatform implements Platform {
 
         if (generalIssues.length > 0) {
           // 将一个文件的所有通用评论合并成一条
-          const fileComment = `## 文件: ${result.file}\n\n${
-            generalIssues.map(issue => this.formatIssueComment(issue)).join('\n\n')}`
+          const fileComment = `## 文件: ${result.file}\n\n${generalIssues.map(issue => this.formatIssueComment(issue)).join('\n\n')}`
 
           // 提交文件级评论
           await this.submitReviewComment(result.file, undefined, fileComment)
