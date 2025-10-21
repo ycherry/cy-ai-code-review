@@ -55,6 +55,9 @@ export default antfu(
       // 忽略构建产物
       'build/**',
       'coverage/**',
+
+      // 忽略测试文件
+      'test_review_file/**',
     ],
   },
 )
